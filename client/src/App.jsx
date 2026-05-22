@@ -15,16 +15,16 @@ function App() {
     });
   };
 
-  const sendMessage = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await axios.post(
-        "https://mern-portfolio-backend-lqso.onrender.com/contact",
-        formData
-      );
+      const API =
+        "https://mern-portfolio-backend-1qso.onrender.com/contact";
 
-      alert("Message Sent Successfully ✅");
+      const response = await axios.post(API, formData);
+
+      alert(response.data.message);
 
       setFormData({
         name: "",
@@ -32,168 +32,128 @@ function App() {
         message: "",
       });
     } catch (error) {
-      alert("Failed To Send Message ❌");
       console.log(error);
+      alert("Error sending message");
     }
   };
 
   return (
-    <div className="font-sans">
-
-      {/* NAVBAR */}
-      <nav className="bg-blue-600 text-white p-5 flex justify-between">
-        <h1 className="text-2xl font-bold">My Portfolio</h1>
-
-        <ul className="flex gap-6">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-
+    <div className="min-h-screen bg-gray-100 text-gray-800">
       {/* HERO SECTION */}
-      <section
-        id="home"
-        className="h-screen flex flex-col justify-center items-center bg-gray-100 text-center p-5"
-      >
-        <h1 className="text-5xl font-bold mb-4">
-          Hi, I'm Kadire 👋
-        </h1>
-
-        <p className="text-xl text-gray-700 mb-5">
-          Beginner Full Stack Developer | MERN Stack Learner
-        </p>
-
-        <button className="bg-blue-600 text-white px-6 py-3 rounded-lg">
-          Explore My Work
-        </button>
-      </section>
-
-      {/* ABOUT SECTION */}
-      <section id="about" className="p-10 bg-white">
-        <h2 className="text-4xl font-bold text-center mb-6">
-          About Me
-        </h2>
-
-        <p className="text-lg text-gray-700 text-center max-w-3xl mx-auto">
-          I am a passionate beginner developer learning Full Stack Development.
-          I enjoy building modern web applications using MERN Stack technologies
-          and continuously improving my coding skills.
+      <section className="bg-blue-600 text-white text-center py-20">
+        <h1 className="text-5xl font-bold mb-4">My Portfolio</h1>
+        <p className="text-xl">
+          MERN Stack Developer | React | Node.js | MongoDB
         </p>
       </section>
 
-      {/* SKILLS SECTION */}
-      <section id="skills" className="p-10 bg-gray-100">
-        <h2 className="text-4xl font-bold text-center mb-10">
-          Skills
-        </h2>
+      {/* ABOUT */}
+      <section className="p-10 text-center">
+        <h2 className="text-3xl font-bold mb-4">About Me</h2>
+        <p className="max-w-2xl mx-auto">
+          I am a passionate MERN Stack Developer who loves building modern web
+          applications and learning new technologies.
+        </p>
+      </section>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 text-center">
+      {/* SKILLS */}
+      <section className="bg-white p-10 text-center">
+        <h2 className="text-3xl font-bold mb-6">Skills</h2>
 
-          <div className="bg-white p-5 rounded-lg shadow">
-            <h3 className="font-bold text-xl mb-2">Programming Languages</h3>
-            <p>C Language</p>
-            <p>Python</p>
-            <p>Java</p>
-          </div>
+        <div className="flex flex-wrap justify-center gap-4">
+          <span className="bg-blue-500 text-white px-4 py-2 rounded">
+            HTML
+          </span>
 
-          <div className="bg-white p-5 rounded-lg shadow">
-            <h3 className="font-bold text-xl mb-2">Frontend</h3>
-            <p>HTML</p>
-            <p>CSS</p>
-            <p>JavaScript</p>
-          </div>
+          <span className="bg-blue-500 text-white px-4 py-2 rounded">
+            CSS
+          </span>
 
-          <div className="bg-white p-5 rounded-lg shadow">
-            <h3 className="font-bold text-xl mb-2">Problem Solving</h3>
-            <p>Working on DSA</p>
-          </div>
+          <span className="bg-blue-500 text-white px-4 py-2 rounded">
+            JavaScript
+          </span>
 
+          <span className="bg-blue-500 text-white px-4 py-2 rounded">
+            React
+          </span>
+
+          <span className="bg-blue-500 text-white px-4 py-2 rounded">
+            Node.js
+          </span>
+
+          <span className="bg-blue-500 text-white px-4 py-2 rounded">
+            MongoDB
+          </span>
         </div>
       </section>
 
-      {/* PROJECTS SECTION */}
-      <section id="projects" className="p-10 bg-white">
-        <h2 className="text-4xl font-bold text-center mb-10">
-          Projects
-        </h2>
+      {/* PROJECTS */}
+      <section className="p-10 text-center">
+        <h2 className="text-3xl font-bold mb-6">Projects</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-white p-6 rounded shadow">
+            <h3 className="text-2xl font-bold mb-2">Portfolio Website</h3>
 
-          <div className="bg-gray-100 p-6 rounded-lg shadow">
-            <h3 className="text-2xl font-bold mb-3">
-              Portfolio Website
-            </h3>
-
-            <p className="text-gray-700">
-              A responsive personal portfolio website built using React,
-              Tailwind CSS, Node.js, Express, and MongoDB.
+            <p>
+              A full MERN stack portfolio project with contact form and MongoDB
+              integration.
             </p>
           </div>
 
-          <div className="bg-gray-100 p-6 rounded-lg shadow">
-            <h3 className="text-2xl font-bold mb-3">
-              MERN Contact Form
-            </h3>
+          <div className="bg-white p-6 rounded shadow">
+            <h3 className="text-2xl font-bold mb-2">Chat Application</h3>
 
-            <p className="text-gray-700">
-              A contact form connected with MongoDB database using Express and
-              Node.js backend.
+            <p>
+              Real-time chat application using Socket.IO and MERN stack.
             </p>
           </div>
-
         </div>
       </section>
 
-      {/* CONTACT SECTION */}
-      <section id="contact" className="p-10 bg-gray-100">
-        <h2 className="text-4xl font-bold text-center mb-10">
-          Contact Me
-        </h2>
+      {/* CONTACT */}
+      <section className="bg-white p-10">
+        <h2 className="text-3xl font-bold text-center mb-6">Contact Me</h2>
 
         <form
-          onSubmit={sendMessage}
-          className="max-w-xl mx-auto bg-white p-8 rounded-lg shadow"
+          onSubmit={handleSubmit}
+          className="max-w-xl mx-auto flex flex-col gap-4"
         >
-
           <input
             type="text"
             name="name"
-            placeholder="Enter Your Name"
+            placeholder="Your Name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full border p-3 mb-4 rounded"
+            className="p-3 border rounded"
             required
           />
 
           <input
             type="email"
             name="email"
-            placeholder="Enter Your Email"
+            placeholder="Your Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full border p-3 mb-4 rounded"
+            className="p-3 border rounded"
             required
           />
 
           <textarea
             name="message"
-            placeholder="Enter Your Message"
+            placeholder="Your Message"
             value={formData.message}
             onChange={handleChange}
-            className="w-full border p-3 mb-4 rounded h-32"
+            className="p-3 border rounded h-32"
             required
-          ></textarea>
+          />
 
           <button
             type="submit"
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg w-full"
+            className="bg-blue-600 text-white p-3 rounded hover:bg-blue-700"
           >
             Send Message
           </button>
-
         </form>
       </section>
 
@@ -201,7 +161,6 @@ function App() {
       <footer className="bg-blue-600 text-white text-center p-5">
         © 2026 My Portfolio
       </footer>
-
     </div>
   );
 }
