@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -14,21 +15,16 @@ function App() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const sendMessage = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      await axios.post(
+        "https://mern-portfolio-backend-lqso.onrender.com/contact",
+        formData
+      );
 
-      const data = await response.json();
-
-      alert(data.message);
+      alert("Message Sent Successfully ✅");
 
       setFormData({
         name: "",
@@ -36,258 +32,173 @@ function App() {
         message: "",
       });
     } catch (error) {
-      alert("Error sending message");
+      alert("Failed To Send Message ❌");
+      console.log(error);
     }
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="font-sans">
 
       {/* NAVBAR */}
-      <nav className="bg-blue-500 text-white p-5 flex justify-between items-center sticky top-0">
+      <nav className="bg-blue-600 text-white p-5 flex justify-between">
+        <h1 className="text-2xl font-bold">My Portfolio</h1>
 
-        <h1 className="text-3xl font-bold">
-          My Portfolio
-        </h1>
-
-        <div className="flex gap-6 text-lg">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </div>
-
+        <ul className="flex gap-6">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </nav>
 
-      {/* HOME SECTION */}
+      {/* HERO SECTION */}
       <section
         id="home"
-        className="min-h-screen flex flex-col justify-center items-center text-center px-5"
+        className="h-screen flex flex-col justify-center items-center bg-gray-100 text-center p-5"
       >
-
-        <h1 className="text-7xl font-bold text-blue-500 mb-6">
-          Full Stack Developer
+        <h1 className="text-5xl font-bold mb-4">
+          Hi, I'm Kadire 👋
         </h1>
 
-        <p className="text-2xl text-gray-600 mb-8">
-          Building modern MERN stack applications
+        <p className="text-xl text-gray-700 mb-5">
+          Beginner Full Stack Developer | MERN Stack Learner
         </p>
 
-        <button className="bg-blue-500 text-white px-8 py-4 rounded-xl text-xl hover:bg-blue-600 transition">
-          View Projects
+        <button className="bg-blue-600 text-white px-6 py-3 rounded-lg">
+          Explore My Work
         </button>
-
       </section>
 
       {/* ABOUT SECTION */}
-      <section
-        id="about"
-        className="py-24 px-8 text-center bg-white"
-      >
-
-        <h2 className="text-5xl font-bold mb-8">
+      <section id="about" className="p-10 bg-white">
+        <h2 className="text-4xl font-bold text-center mb-6">
           About Me
         </h2>
 
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Passionate about learning Full Stack Web Development
-          and building modern web applications using MERN stack.
+        <p className="text-lg text-gray-700 text-center max-w-3xl mx-auto">
+          I am a passionate beginner developer learning Full Stack Development.
+          I enjoy building modern web applications using MERN Stack technologies
+          and continuously improving my coding skills.
         </p>
-
       </section>
 
       {/* SKILLS SECTION */}
-      <section
-        id="skills"
-        className="py-24 px-8"
-      >
-
-        <h2 className="text-5xl font-bold text-center mb-14">
+      <section id="skills" className="p-10 bg-gray-100">
+        <h2 className="text-4xl font-bold text-center mb-10">
           Skills
         </h2>
 
-        <div className="max-w-5xl mx-auto space-y-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 text-center">
 
-          {/* Programming Languages */}
-          <div>
-
-            <h3 className="text-3xl font-semibold mb-6 text-blue-500">
-              Programming Languages
-            </h3>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-
-              {[
-                "C Language",
-                "Python",
-                "Java",
-                "JavaScript",
-              ].map((skill) => (
-                <div
-                  key={skill}
-                  className="bg-white p-6 rounded-2xl shadow-md text-center text-lg font-semibold hover:scale-105 transition"
-                >
-                  {skill}
-                </div>
-              ))}
-
-            </div>
-
+          <div className="bg-white p-5 rounded-lg shadow">
+            <h3 className="font-bold text-xl mb-2">Programming Languages</h3>
+            <p>C Language</p>
+            <p>Python</p>
+            <p>Java</p>
           </div>
 
-          {/* Web Development */}
-          <div>
-
-            <h3 className="text-3xl font-semibold mb-6 text-blue-500">
-              Web Development
-            </h3>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-
-              {[
-                "HTML",
-                "CSS",
-                "Frontend Development",
-                "Backend Development",
-              ].map((skill) => (
-                <div
-                  key={skill}
-                  className="bg-white p-6 rounded-2xl shadow-md text-center text-lg font-semibold hover:scale-105 transition"
-                >
-                  {skill}
-                </div>
-              ))}
-
-            </div>
-
+          <div className="bg-white p-5 rounded-lg shadow">
+            <h3 className="font-bold text-xl mb-2">Frontend</h3>
+            <p>HTML</p>
+            <p>CSS</p>
+            <p>JavaScript</p>
           </div>
 
-          {/* Problem Solving */}
-          <div>
-
-            <h3 className="text-3xl font-semibold mb-6 text-blue-500">
-              Problem Solving
-            </h3>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-
-              {[
-                "Data Structures & Algorithms (DSA)",
-              ].map((skill) => (
-                <div
-                  key={skill}
-                  className="bg-white p-6 rounded-2xl shadow-md text-center text-lg font-semibold hover:scale-105 transition"
-                >
-                  {skill}
-                </div>
-              ))}
-
-            </div>
-
+          <div className="bg-white p-5 rounded-lg shadow">
+            <h3 className="font-bold text-xl mb-2">Problem Solving</h3>
+            <p>Working on DSA</p>
           </div>
 
         </div>
-
       </section>
 
       {/* PROJECTS SECTION */}
-      <section
-        id="projects"
-        className="py-24 px-8 bg-white"
-      >
-
-        <h2 className="text-5xl font-bold text-center mb-14">
+      <section id="projects" className="p-10 bg-white">
+        <h2 className="text-4xl font-bold text-center mb-10">
           Projects
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-10">
+        <div className="grid md:grid-cols-2 gap-6">
 
-          <div className="bg-gray-100 p-8 rounded-2xl shadow-md">
-
-            <h3 className="text-3xl font-bold mb-4">
+          <div className="bg-gray-100 p-6 rounded-lg shadow">
+            <h3 className="text-2xl font-bold mb-3">
               Portfolio Website
             </h3>
 
-            <p className="text-gray-600 text-lg">
-              Built using React, Node.js, Express, and MongoDB.
+            <p className="text-gray-700">
+              A responsive personal portfolio website built using React,
+              Tailwind CSS, Node.js, Express, and MongoDB.
             </p>
-
           </div>
 
-          <div className="bg-gray-100 p-8 rounded-2xl shadow-md">
-
-            <h3 className="text-3xl font-bold mb-4">
-              MERN Contact App
+          <div className="bg-gray-100 p-6 rounded-lg shadow">
+            <h3 className="text-2xl font-bold mb-3">
+              MERN Contact Form
             </h3>
 
-            <p className="text-gray-600 text-lg">
-              Full stack contact form with MongoDB database.
+            <p className="text-gray-700">
+              A contact form connected with MongoDB database using Express and
+              Node.js backend.
             </p>
-
           </div>
 
         </div>
-
       </section>
 
       {/* CONTACT SECTION */}
-      <section
-        id="contact"
-        className="py-24 px-8"
-      >
-
-        <h2 className="text-5xl font-bold text-center mb-14">
-          Contact
+      <section id="contact" className="p-10 bg-gray-100">
+        <h2 className="text-4xl font-bold text-center mb-10">
+          Contact Me
         </h2>
 
         <form
-          onSubmit={handleSubmit}
-          className="max-w-2xl mx-auto bg-white p-10 rounded-2xl shadow-lg"
+          onSubmit={sendMessage}
+          className="max-w-xl mx-auto bg-white p-8 rounded-lg shadow"
         >
 
           <input
             type="text"
             name="name"
-            placeholder="Enter Name"
+            placeholder="Enter Your Name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full p-4 mb-6 border rounded-xl"
+            className="w-full border p-3 mb-4 rounded"
             required
           />
 
           <input
             type="email"
             name="email"
-            placeholder="Enter Email"
+            placeholder="Enter Your Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full p-4 mb-6 border rounded-xl"
+            className="w-full border p-3 mb-4 rounded"
             required
           />
 
           <textarea
             name="message"
-            placeholder="Enter Message"
+            placeholder="Enter Your Message"
             value={formData.message}
             onChange={handleChange}
-            className="w-full p-4 mb-6 border rounded-xl h-40"
+            className="w-full border p-3 mb-4 rounded h-32"
             required
           ></textarea>
 
           <button
             type="submit"
-            className="bg-blue-500 text-white px-8 py-4 rounded-xl w-full text-xl hover:bg-blue-600 transition"
+            className="bg-blue-600 text-white px-6 py-3 rounded-lg w-full"
           >
             Send Message
           </button>
 
         </form>
-
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-blue-500 text-white text-center p-5">
+      <footer className="bg-blue-600 text-white text-center p-5">
         © 2026 My Portfolio
       </footer>
 
